@@ -1,4 +1,4 @@
-# CRUD-Application-and-A-GraphQL-API
+# CRUD-Application-And-A-GraphQL-API
 
 this is a simple CRUD Application developed with:
 Nodejs, Expressjs, GraphQL, and MongoDB (Server Side)
