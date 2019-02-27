@@ -2,8 +2,10 @@ const express = require('express')
 const graphqlHTTP = require('express-graphql')
 const schema = require('./schema/schema')
 const mongoose = require('mongoose')
+const cors = require('cors') // allow requests from another server
 
 const app = express()
+app.use(cors())
 
 mongoose.connect("mongodb+srv://tester:tester123@cluster0-9sdzj.mongodb.net/main?retryWrites=true")
 mongoose.connection.once('open', () => {console.log('connected to DB')})

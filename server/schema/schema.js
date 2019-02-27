@@ -43,6 +43,7 @@ const CategoryObjectType = new GraphQLObjectType({
 const RootQuery = new GraphQLObjectType({
     name: 'RootQueryType',
     fields: {
+        //find by id
         product:{
             type: ProductObjectType,
             args: { id: { type: GraphQLID } },
@@ -59,6 +60,7 @@ const RootQuery = new GraphQLObjectType({
             }
         },
 
+        // find all
         products: {
             type: new GraphQLList(ProductObjectType),
             resolve(parent, args){
@@ -78,6 +80,7 @@ const RootQuery = new GraphQLObjectType({
 const Mutation = new GraphQLObjectType({
     name: 'Mutation',
     fields: {
+        // CREATE
         createCategory: {
             type: CategoryObjectType,
             args: {
@@ -106,6 +109,7 @@ const Mutation = new GraphQLObjectType({
             }
         },
 
+        // DELETE
         deleteProduct: {
             type: ProductObjectType,
             args: {
@@ -134,6 +138,7 @@ const Mutation = new GraphQLObjectType({
             }
         },
 
+        // UPDATE
         updateProduct: {
             type: ProductObjectType,
             args: {
