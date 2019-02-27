@@ -1,7 +1,6 @@
 import React from 'react';
 import ApolloClient from 'apollo-boost'
 import { ApolloProvider } from 'react-apollo'
-import { graphql } from 'react-apollo'
 import './App.css';
 
 const client = new ApolloClient({
@@ -13,7 +12,7 @@ class App extends React.Component {
     return (
       <ApolloProvider client={client}>
         <div className="App">
-        
+          <h1>User-Interface</h1>
         </div>
       </ApolloProvider>
     );
