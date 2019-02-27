@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 
 const app = express()
 
-mongoose.connect("mongodb+srv://tester:tester123@cluster0-9sdzj.mongodb.net/test?retryWrites=true")
+mongoose.connect("mongodb+srv://tester:tester123@cluster0-9sdzj.mongodb.net/main?retryWrites=true")
 mongoose.connection.once('open', () => {console.log('connected to DB')})
 
 app.use('/BeMyGuest', graphqlHTTP({

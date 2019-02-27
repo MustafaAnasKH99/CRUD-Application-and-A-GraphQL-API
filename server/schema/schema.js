@@ -8,7 +8,8 @@ const {
     GraphQLString,
     GraphQLSchema,
     GraphQLID,
-    GraphQLList
+    GraphQLList,
+    GraphQLNonNull
 } = graphql
 
 const ProductObjectType = new GraphQLObjectType({
@@ -20,6 +21,7 @@ const ProductObjectType = new GraphQLObjectType({
             type: CategoryObjectType,
             resolve(parent, args){
                 // return _.find(products, {id: parent.categoryId})
+                return Category.findById(parent.parentCategoryId)
             }
         }
     })
@@ -34,6 +36,7 @@ const CategoryObjectType = new GraphQLObjectType({
             type: new GraphQLList(ProductObjectType),
             resolve(parent, args){
                 // return _.filter(products, {categoryId: parent.id})
+                return Product.find({parentCategoryId: parent.id})
             }
         }, 
     })
@@ -48,6 +51,7 @@ const RootQuery = new GraphQLObjectType({
             resolve(parent, args){
               // code to get data from db
             //  return _.find(products, {id: args.id})
+                return Product.findById(args.id)
             }
         },
 
@@ -57,19 +61,61 @@ const RootQuery = new GraphQLObjectType({
             resolve(parent, args){
               // code to get data from db
             //  return _.find(categories, {id: args.id})
-
+                return Category.findById(args.id)
             }
         },
+
+        products: {
+            type: new GraphQLList(ProductObjectType),
+            resolve(parent, args){
+              // return products
+              return Product.find({})
+            }
+          },
 
         categories: {
             type: new GraphQLList(CategoryObjectType),
             resolve(parent, args){
                 // return categories
+                return Category.find({})
             }
         }
     }
 })
 
+const Mutation = new GraphQLObjectType({
+    name: 'Mutation',
+    fields: {
+        createCategory: {
+          type: CategoryObjectType,
+          args: {
+              name: { type: new GraphQLNonNull(GraphQLString) }
+            },
+          resolve(parent, args){
+              let category = new Category({
+                  name: args.name
+                });
+              return category.save();
+            }
+        },
+        createProduct: {
+            type: ProductObjectType,
+            args: {
+              name: { type: new GraphQLNonNull(GraphQLString) },
+              parentCategoryId: { type: new GraphQLNonNull(GraphQLID) }
+            },
+            resolve(parent, args){
+              let product = new Product({
+                name: args.name,
+                parentCategoryId: args.parentCategoryId
+              })
+              return product.save()
+            }
+        }
+    }
+});
+
 module.exports = new GraphQLSchema({
-    query: RootQuery
+    query: RootQuery,
+    mutation: Mutation
   })
