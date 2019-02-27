@@ -9,6 +9,6 @@ Nodejs, Expressjs, GraphQL, and MongoDB (Server Side)
   - go to the main folder and open it in your terminal
   - run _npm install_ 
   - run npm start
-  - go to localhost:8080/BeMyGuest (_if the browser does not run the local host automatically_)
+  - go to localhost:5000/BeMyGuest (_if the browser does not run the local host automatically_)
 
 ### feel free to track the completion process of this project in the issues section
