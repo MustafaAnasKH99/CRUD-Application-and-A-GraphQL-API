@@ -9,7 +9,8 @@ const {
     GraphQLSchema,
     GraphQLID,
     GraphQLList,
-    GraphQLNonNull
+    GraphQLNonNull,
+    GraphQLInputObjectType
 } = graphql
 
 const ProductObjectType = new GraphQLObjectType({
@@ -91,8 +92,8 @@ const Mutation = new GraphQLObjectType({
           args: {
               name: { type: new GraphQLNonNull(GraphQLString) }
             },
-          resolve(parent, args){
-              let category = new Category({
+          async resolve(parent, args){
+              let category = await new Category({
                   name: args.name
                 });
               return category.save();
@@ -104,12 +105,67 @@ const Mutation = new GraphQLObjectType({
               name: { type: new GraphQLNonNull(GraphQLString) },
               parentCategoryId: { type: new GraphQLNonNull(GraphQLID) }
             },
-            resolve(parent, args){
-              let product = new Product({
+            async resolve(parent, args){
+              let product = await new Product({
                 name: args.name,
                 parentCategoryId: args.parentCategoryId
               })
               return product.save()
+            }
+        },
+        deleteProduct: {
+            type: ProductObjectType,
+            args: {
+              id: { type: new GraphQLNonNull(GraphQLID) }
+            },
+            async resolve(parent, args){
+              let deletedProduct = await Product.findByIdAndRemove(args.id)
+              if (!deletedProduct) {
+                throw new Error('Error')
+                }
+              return deletedProduct
+            }
+        },
+        deleteCategory: {
+            type: CategoryObjectType,
+            args: {
+              id: { type: new GraphQLNonNull(GraphQLID) }
+            },
+            async resolve(parent, args){
+              let deletedCategory = await Category.findByIdAndRemove(args.id)
+              if (!deletedCategory) {
+                throw new Error('Error')
+                }
+              return deletedCategory
+            }
+        },
+        updateProduct: {
+            type: ProductObjectType,
+            args: {
+              id: { type: new GraphQLNonNull(GraphQLID) },
+              name: { type: GraphQLString },
+              parentCategoryId: { type: GraphQLString }
+            },
+            async resolve(parent, args){
+              let updatedProduct = await Product.findByIdAndUpdate(args.id, args)
+              if (!updatedProduct) {
+                throw new Error('Error')
+                }
+              return updatedProduct
+            }
+        },
+        updateCategory: {
+            type: CategoryObjectType,
+            args: {
+              id: { type: new GraphQLNonNull(GraphQLID) },
+              name: { type: new GraphQLNonNull(GraphQLString) }
+            },
+            async resolve(parent, args){
+              let updatedCategory = await Category.findByIdAndUpdate(args.id, args)
+              if (!updatedCategory) {
+                throw new Error('Error')
+                }
+              return updatedCategory
             }
         }
     }
