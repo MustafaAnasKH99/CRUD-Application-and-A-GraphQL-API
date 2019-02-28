@@ -1,0 +1,27 @@
+{
+  "name": "CRUD-Application-and-A-GraphQL-API",
+  "version": "1.0.0",
+  "description": "this is a simple CRUD Application developed with: Nodejs, Expressjs, GraphQL, and MongoDB (Server Side) & Reactjs with Apollo (Client Side). The user is able to create different categories, and products that belong to certain categories.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "cd server && npm start",
+    "client": "cd client && npm start",
+    "start": "concurrently --kill-others-on-fail --names \"server,client\" \"npm run server\" \"npm run client\"",
+    "postinstall":"cd client && npm install && cd .. && cd server && npm install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MustafaAnasKH99/CRUD-Application-and-A-GraphQL-API.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MustafaAnasKH99/CRUD-Application-and-A-GraphQL-API/issues"
+  },
+  "homepage": "https://github.com/MustafaAnasKH99/CRUD-Application-and-A-GraphQL-API#readme",
+  "dependencies": {
+    "concurrently": "^4.1.0"
+  }
+}
