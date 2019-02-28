@@ -11,9 +11,8 @@ class UpdateProduct extends React.Component{
         }
     }
 
-    excuteUpdate(){
-        // console.log(this.props.productId)
-        this.props.updateProductMutation({
+    async excuteUpdate(){
+        await this.props.updateProductMutation({
             variables:{
                 id: this.props.productId,
                 name: this.state.name
@@ -29,7 +28,7 @@ class UpdateProduct extends React.Component{
             return (
                 <div>
                     <input type="text" onChange={(e) => this.setState({name: e.target.value})}></input>
-                    <button onClick={() => this.excuteUpdate()}>Edit</button>
+                    <button onClick={() => this.excuteUpdate()}>Edit Product</button>
                 </div>
             )
         }

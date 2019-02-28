@@ -11,9 +11,9 @@ class CreateProducts extends React.Component{
         }
     }
 
-    handleSubmission(e){
+    async handleSubmission(e){
         e.preventDefault()
-        this.props.createProductMutation({
+        await this.props.createProductMutation({
             variables:{
                 name: this.state.name,
                 parentCategoryId: this.state.parentCategoryId
@@ -59,5 +59,4 @@ class CreateProducts extends React.Component{
 
 export default compose(
     graphql(getCategoriesQuery, { name: "getCategoriesQuery" }),
-    graphql(createProductMutation, { name: "createProductMutation" }) 
-)(CreateProducts)
+    graphql(createProductMutation, { name: "createProductMutation" }))(CreateProducts)

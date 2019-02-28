@@ -11,9 +11,8 @@ class UpdateCategory extends React.Component{
         }
     }
 
-    excuteUpdate(){
-        // console.log(this.props.productId)
-        this.props.updateCategoryMutation({
+    async excuteUpdate(){
+        await this.props.updateCategoryMutation({
             variables:{
                 id: this.props.productId,
                 name: this.state.name
@@ -29,7 +28,7 @@ class UpdateCategory extends React.Component{
             return (
                 <div>
                     <input type="text" onChange={(e) => this.setState({name: e.target.value})}></input>
-                    <button onClick={() => this.excuteUpdate()}>Edit</button>
+                    <button onClick={() => this.excuteUpdate()}>Edit Category</button>
                 </div>
             )
         }

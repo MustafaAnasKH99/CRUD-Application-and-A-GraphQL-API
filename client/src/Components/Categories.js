@@ -14,8 +14,8 @@ class Categories extends React.Component{
         }
     }
 
-    deleteCategory(id){
-        this.props.deleteCategoryMutation({
+    async deleteCategory(id){
+        await this.props.deleteCategoryMutation({
              variables:{
                  id: id
              },
@@ -48,7 +48,10 @@ class Categories extends React.Component{
                 <ol>
                     {this.displayCategories()}
                 </ol>
-                <UpdateCategory productId={this.state.selectedId} productName={this.state.selectedName}/>
+                <UpdateCategory
+                    productId={this.state.selectedId}
+                    productName={this.state.selectedName}
+                />
             </div>
         )
     }
@@ -56,5 +59,4 @@ class Categories extends React.Component{
 
 export default compose(
     graphql(getCategoriesQuery, { name: "getCategoriesQuery" }),
-    graphql(deleteCategoryMutation, { name: "deleteCategoryMutation" }) 
-)(Categories)
+    graphql(deleteCategoryMutation, { name: "deleteCategoryMutation" }))(Categories)

@@ -14,8 +14,9 @@ class Products extends React.Component{
             selectedName: null
         }
     }
-    deleteProduct(id){
-        this.props.deleteProductMutation({
+
+    async deleteProduct(id){
+        await this.props.deleteProductMutation({
             variables:{
                 id: id
             },
@@ -23,10 +24,8 @@ class Products extends React.Component{
         }) 
     }
 
-    updateProduct = (id, name) => {
-        // console.log(id)
+    updateProduct = async (id, name) => {
         this.setState({selectedId: id, selectedName: name})
-        console.log(this.state.selectedName)
     }
 
     displayProducts=()=>{
@@ -35,7 +34,7 @@ class Products extends React.Component{
             return (
                 <tr>
                     <td>
-                        <p>Data Loading ..</p>
+                        <p>Loading Products ..</p>
                     </td>
                 </tr>
             )
@@ -81,7 +80,10 @@ class Products extends React.Component{
                         {this.displayProducts()}
                     </tbody>
                 </table>
-                <UpdateProduct productId={this.state.selectedId} productName={this.state.selectedName}/>
+                <UpdateProduct 
+                    productId={this.state.selectedId} 
+                    productName={this.state.selectedName}
+                />
             </div>
         )
     }
@@ -90,5 +92,4 @@ class Products extends React.Component{
 export default compose(
     graphql(getProductsQuery, { name: "getProductsQuery" }),
     graphql(deleteProductMutation, { name: "deleteProductMutation" }),
-    graphql(deleteCategoryMutation, { name: "deleteCategoryMutation" }) 
-)(Products)
+    graphql(deleteCategoryMutation, { name: "deleteCategoryMutation" }))(Products)
