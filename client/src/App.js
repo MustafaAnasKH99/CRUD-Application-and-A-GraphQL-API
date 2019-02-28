@@ -5,6 +5,8 @@ import './App.css';
 
 // imported comps
 import Products from './Components/Products'
+import CreateProduct from './Components/CreateProduct'
+import CreateCategory from './Components/CreateCategory'
 
 const client = new ApolloClient({
   uri: "http://localhost:5000/BeMyGuest"
@@ -17,6 +19,8 @@ class App extends React.Component {
         <div className="App">
           <h1>User-Interface</h1>
           <Products />
+          <CreateCategory />
+          <CreateProduct />
         </div>
       </ApolloProvider>
     );

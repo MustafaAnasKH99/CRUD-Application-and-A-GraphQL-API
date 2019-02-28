@@ -1,26 +1,22 @@
 import React from 'react';
-import { gql } from 'apollo-boost'
 import { graphql } from 'react-apollo';
+import { getProductsQuery } from '../Queries/Queries'
+
 // imported comps
 import Categories from './Categories'
-
-const getProductsQuery = gql`
-    {
-        products{
-            name, 
-            id,
-            category{
-                name
-            }
-        }
-    }
-`
 
 class Products extends React.Component{
     displayProducts(){
         const data = this.props.data
         if(data.loading){
-            return <div>Data is loading ...</div>
+            return (
+                <tr>
+                    <td>
+                        <p>data loading</p>
+                    </td>
+                </tr>
+            )
+
         } else {
             return data.products.map(product => {
                 return (
@@ -43,13 +39,15 @@ class Products extends React.Component{
             <div className="products">
                 <h2>Products:</h2>
                 <table>
-                    <tr>
-                        <th>Product Name</th>
-                        <th>Category Name</th>
-                    </tr>
+                    <tbody>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Category Name</th>
+                        </tr>
                         {this.displayProducts()}
+                    </tbody>
                 </table>
-                {/* <Categories /> */}
+                <Categories />
             </div>
         )
     }
