@@ -2,8 +2,18 @@ import React from 'react';
 import { graphql, compose } from 'react-apollo';
 import { deleteCategoryMutation, getCategoriesQuery } from '../Queries/Queries'
 
+import UpdateCategory from './UpdateCategory'
+
 
 class Categories extends React.Component{
+    constructor(props){
+        super(props)
+        this.state = {
+            selectedId: null,
+            selectedName: null
+        }
+    }
+
     deleteCategory(id){
         this.props.deleteCategoryMutation({
              variables:{
@@ -24,6 +34,7 @@ class Categories extends React.Component{
                         <li key={category.id}>
                             {category.name}
                             <button onClick={() => {this.deleteCategory(category.id)}}>Delete</button>
+                            <button onClick={() => { this.setState({selectedId: category.id, selectedName: category.name})}}>Edit</button>
                         </li>
                     )
                 })
@@ -37,6 +48,7 @@ class Categories extends React.Component{
                 <ol>
                     {this.displayCategories()}
                 </ol>
+                <UpdateCategory productId={this.state.selectedId} productName={this.state.selectedName}/>
             </div>
         )
     }

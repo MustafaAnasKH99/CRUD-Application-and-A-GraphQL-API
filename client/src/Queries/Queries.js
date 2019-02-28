@@ -22,6 +22,15 @@ const getProductsQuery = gql`
     }
 `
 
+const getProductQuery = gql`
+query($id: ID){
+    product(id: $id){
+        id,
+        name
+    }
+}
+`
+
 const createProductMutation = gql`
 mutation($name: String!, $parentCategoryId: ID!){
     createProduct(name: $name, parentCategoryId: $parentCategoryId){
@@ -30,6 +39,16 @@ mutation($name: String!, $parentCategoryId: ID!){
     }
 }
 `
+
+const createCategoryMutation = gql`
+mutation($name: String!){
+    createCategory(name: $name){
+        name
+        id
+    }
+}
+`
+
 const deleteProductMutation = gql`
 mutation($id: ID!){
     deleteProduct(id: $id){
@@ -47,13 +66,31 @@ mutation($id: ID!){
 }
 `
 
-const createCategoryMutation = gql`
-mutation($name: String!){
-    createCategory(name: $name){
+const updateCategoryMutation = gql`
+mutation($id: ID!, $name: String!){
+    updateCategory(id: $id, name: $name){
         name
         id
     }
 }
 `
 
-export { getProductsQuery, getCategoriesQuery, createProductMutation, createCategoryMutation, deleteProductMutation, deleteCategoryMutation } 
+const updateProductMutation = gql`
+mutation($id: ID!, $name: String!){
+    updateProduct(id: $id, name: $name){
+        name
+        id
+    }
+}
+`
+
+export { getProductsQuery, 
+        getCategoriesQuery, 
+        createProductMutation, 
+        createCategoryMutation, 
+        deleteProductMutation, 
+        deleteCategoryMutation,
+        updateProductMutation,
+        updateCategoryMutation,
+        getProductQuery } 
+    
