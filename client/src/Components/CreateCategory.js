@@ -1,6 +1,6 @@
 import React from 'react';
 import { graphql } from 'react-apollo';
-import { createCategoryMutation } from '../Queries/Queries'
+import { createCategoryMutation, getCategoriesQuery } from '../Queries/Queries'
 
 class CreateCategory extends React.Component{
     constructor(props){
@@ -15,7 +15,8 @@ class CreateCategory extends React.Component{
         this.props.createCategoryMutation({
             variables:{
                 name: this.state.name
-            }
+            },
+            refetchQueries:[{query: getCategoriesQuery}]
         })
     }
 

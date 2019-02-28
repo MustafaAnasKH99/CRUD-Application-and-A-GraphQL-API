@@ -1,18 +1,31 @@
 import React from 'react';
-import { graphql } from 'react-apollo';
-import { getProductsQuery } from '../Queries/Queries'
+import { graphql, compose } from 'react-apollo';
+import { getProductsQuery, deleteProductMutation, deleteCategoryMutation } from '../Queries/Queries'
 
 // imported comps
 import Categories from './Categories'
 
 class Products extends React.Component{
-    displayProducts(){
-        const data = this.props.data
+    deleteProduct(id){
+        this.props.deleteProductMutation({
+            variables:{
+                id: id
+            },
+            refetchQueries:[{query: getProductsQuery}]
+        }) 
+    }
+
+    updateProduct(id){
+        console.log(id)
+    }
+
+    displayProducts=()=>{
+        const data = this.props.getProductsQuery
         if(data.loading){
             return (
                 <tr>
                     <td>
-                        <p>data loading</p>
+                        <p>Data Loading ..</p>
                     </td>
                 </tr>
             )
@@ -21,8 +34,14 @@ class Products extends React.Component{
             return data.products.map(product => {
                 return (
                     <tr key={product.id}>
-                        <td>{product.name}</td>
-                        <td>{product.category.name}</td>
+                        <td>
+                            {product.name}
+                            <button onClick={() => this.deleteProduct(product.id)}>Delete</button>
+                            <button onClick={() => this.updateProduct(product.id)}>Edit</button>
+                        </td>
+                        <td>
+                            {product.category.name}
+                        </td>
                     </tr>
                 )
             })
@@ -30,13 +49,9 @@ class Products extends React.Component{
     }
 
     render(){
-        console.log(this.props)
-        // this won't work YET because graphql runs on a different server
-        // so we need to install something on our express graphql server
-        // to let it accept requests from another server (the client one)
-        // console.log(this.props)
         return (
             <div className="products">
+                <Categories />
                 <h2>Products:</h2>
                 <table>
                     <tbody>
@@ -47,10 +62,13 @@ class Products extends React.Component{
                         {this.displayProducts()}
                     </tbody>
                 </table>
-                <Categories />
             </div>
         )
     }
 }
 
-export default graphql(getProductsQuery)(Products)
+export default compose(
+    graphql(getProductsQuery, { name: "getProductsQuery" }),
+    graphql(deleteProductMutation, { name: "deleteProductMutation" }),
+    graphql(deleteCategoryMutation, { name: "deleteCategoryMutation" }) 
+)(Products)

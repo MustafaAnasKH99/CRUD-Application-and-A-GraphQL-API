@@ -15,7 +15,8 @@ const getProductsQuery = gql`
             name, 
             id,
             category{
-                name
+                name,
+                id
             }
         }
     }
@@ -24,6 +25,22 @@ const getProductsQuery = gql`
 const createProductMutation = gql`
 mutation($name: String!, $parentCategoryId: ID!){
     createProduct(name: $name, parentCategoryId: $parentCategoryId){
+        name
+        id
+    }
+}
+`
+const deleteProductMutation = gql`
+mutation($id: ID!){
+    deleteProduct(id: $id){
+        name
+        id
+    }
+}
+`
+const deleteCategoryMutation = gql`
+mutation($id: ID!){
+    deleteCategory(id: $id){
         name
         id
     }
@@ -39,4 +56,4 @@ mutation($name: String!){
 }
 `
 
-export { getProductsQuery, getCategoriesQuery, createProductMutation, createCategoryMutation } 
+export { getProductsQuery, getCategoriesQuery, createProductMutation, createCategoryMutation, deleteProductMutation, deleteCategoryMutation } 
