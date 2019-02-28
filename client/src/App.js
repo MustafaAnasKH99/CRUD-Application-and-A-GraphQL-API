@@ -16,7 +16,7 @@ class App extends React.Component {
   render() {
     return (
       <ApolloProvider client={client}>
-        <div className="App">
+        <div className="grid-container">
           <h1>User-Interface</h1>
           <Products />
           <CreateCategory />

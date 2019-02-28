@@ -42,7 +42,6 @@ class Products extends React.Component{
         } else {
             return data.products.map(product => {
                 return (
-                    <div>
                         <tr key={product.id}>
                             <td>
                                 {product.name}
@@ -57,8 +56,7 @@ class Products extends React.Component{
                                 <button onClick={(e) => { this.setState({ selectedId: product.id, selectedName: product.name })}}>Edit</button>
                             </td>
                         </tr>
-                        {this.updateProduct}
-                    </div>
+                        
                 )
             })
         }
@@ -66,9 +64,9 @@ class Products extends React.Component{
 
     render(){
         return (
-            <div className="products">
+            <div className="products grid-item1">
                 <Categories />
-                <h2>Products:</h2>
+                <h3>Products:</h3>
                 <table>
                     <tbody>
                         <tr>
@@ -80,6 +78,7 @@ class Products extends React.Component{
                         {this.displayProducts()}
                     </tbody>
                 </table>
+                {this.updateProduct}
                 <UpdateProduct 
                     productId={this.state.selectedId} 
                     productName={this.state.selectedName}

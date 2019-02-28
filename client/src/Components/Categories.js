@@ -31,11 +31,15 @@ class Categories extends React.Component{
             return (
                 data.categories.map(category => {
                     return(
-                        <li key={category.id}>
-                            {category.name}
-                            <button onClick={() => {this.deleteCategory(category.id)}}>Delete</button>
-                            <button onClick={() => { this.setState({selectedId: category.id, selectedName: category.name})}}>Edit</button>
-                        </li>
+                        <tr key={category.id}>
+                            <td>{category.name}</td>
+                            <td>
+                                <button onClick={() => {this.deleteCategory(category.id)}}>Delete</button>
+                            </td>
+                            <td>
+                                <button onClick={() => { this.setState({selectedId: category.id, selectedName: category.name})}}>Edit</button>
+                            </td>
+                        </tr>
                     )
                 })
             )
@@ -43,11 +47,16 @@ class Categories extends React.Component{
     }
     render(){
         return (
-            <div className="categories">
-                <h2>Categories</h2>
-                <ol>
+            <div className="categories grid-item2">
+                <h3>Categories</h3>
+                <table>
+                    <tr>
+                        <th>Category Name</th>
+                        <th>Delete</th>
+                        <th>Edit</th>
+                    </tr>
                     {this.displayCategories()}
-                </ol>
+                </table>
                 <UpdateCategory
                     productId={this.state.selectedId}
                     productName={this.state.selectedName}

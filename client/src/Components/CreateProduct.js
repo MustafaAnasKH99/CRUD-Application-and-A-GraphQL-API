@@ -36,7 +36,7 @@ class CreateProducts extends React.Component{
     }
     render(){
         return(
-            <form id="add-product" onSubmit={this.handleSubmission.bind(this)}>
+            <form className="add-something grid-item4" onSubmit={this.handleSubmission.bind(this)}>
 
                 <div className="field">
                     <label>Product name:</label>
@@ -50,8 +50,9 @@ class CreateProducts extends React.Component{
                         { this.displayCategories() }
                     </select>
                 </div>
-
-                <button>Create Product</button>
+                <div className="field">
+                    <button>Create Product</button>
+                </div>
             </form>
         )
     }

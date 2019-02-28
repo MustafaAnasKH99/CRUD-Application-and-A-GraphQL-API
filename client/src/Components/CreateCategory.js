@@ -22,15 +22,19 @@ class CreateCategory extends React.Component{
 
     render(){
         return(
-            <form id="add-product" onSubmit={this.handleCreation.bind(this)}>
+            <div className="add-something grid-item3">
+                <form id="add-something" onSubmit={this.handleCreation.bind(this)}>
 
-                <div className="field">
-                    <label>Category Name:</label>
-                    <input type="text" onChange = {(e) => {this.setState({name: e.target.value})}}/>
-                </div>
+                    <div className="field">
+                        <label>Category Name:</label>
+                        <input type="text" onChange = {(e) => {this.setState({name: e.target.value})}}/>
+                    </div>
+                    <div className="field">
+                        <button>Create Category</button>
+                    </div>
 
-                <button>Create Category</button>
-            </form>
+                </form>
+            </div>
         )
     }
 }
