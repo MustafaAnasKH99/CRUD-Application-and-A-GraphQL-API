@@ -8,8 +8,8 @@ Nodejs, Expressjs, GraphQL, and MongoDB (Server Side)
   - clone this repository
   - open the main folder
   - go to the main folder and open it in your terminal
-  - run npm install
-  - run npm start
+  - run _`npm install`_
+  - run _`npm start`_
   - go to localhost:3000 (_if the browser does not run the local host automatically_)
 
 ### feel free to track the completion process of this project in the issues section
