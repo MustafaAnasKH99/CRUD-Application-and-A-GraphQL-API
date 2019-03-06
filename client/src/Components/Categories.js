@@ -1,6 +1,6 @@
 import React from 'react';
 import { graphql, compose } from 'react-apollo';
-import { deleteCategoryMutation, getCategoriesQuery } from '../Queries/Queries'
+import { deleteCategoryMutation, getCategoriesQuery, getProductsQuery } from '../Queries/Queries'
 
 import UpdateCategory from './UpdateCategory'
 
@@ -15,18 +15,25 @@ class Categories extends React.Component{
     }
 
     async deleteCategory(id){
-        await this.props.deleteCategoryMutation({
-             variables:{
-                 id: id
-             },
-             refetchQueries:[{query: getCategoriesQuery}]
-         }) 
+        if(window.confirm("Deleting this will delete all its products, sure?")){
+            await this.props.deleteCategoryMutation({
+                 variables:{
+                     id: id
+                 },
+                 refetchQueries:[{query: getCategoriesQuery}, {query: getProductsQuery}]
+             }) 
+        }
      }
 
     displayCategories = () => {
         const data = this.props.getCategoriesQuery
         if(data.loading){
-            return <p>Loading Categories..</p>
+            return (
+                <div class="loading-container">
+                    <div class="loading"></div>
+                    <div id="loading-text">loading</div>
+                </div>
+            )
         } else {
             return (
                 data.categories.map(category => {

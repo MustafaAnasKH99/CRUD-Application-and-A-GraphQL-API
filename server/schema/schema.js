@@ -1,7 +1,7 @@
 const graphql = require('graphql')
 const _ = require('lodash')
-const Product = require('../models/Product')
 const Category = require('../models/Category')
+const Product = require('../models/Product')
 
 const {
     GraphQLObjectType,
@@ -130,11 +130,13 @@ const Mutation = new GraphQLObjectType({
                 id: { type: new GraphQLNonNull(GraphQLID) }
             },
             async resolve(parent, args){
+                let deletedProducts = await Product.deleteMany({parentCategoryId: args.id})
                 let deletedCategory = await Category.findByIdAndRemove(args.id)
                 if (!deletedCategory) {
                     throw new Error('Error')
                 }
-                return deletedCategory
+
+                return deletedCategory, deletedProducts
             }
         },
 

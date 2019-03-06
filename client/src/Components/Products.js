@@ -32,11 +32,10 @@ class Products extends React.Component{
         const data = this.props.getProductsQuery
         if(data.loading){
             return (
-                <tr>
-                    <td>
-                        <p>Loading Products ..</p>
-                    </td>
-                </tr>
+                <div class="loading-container">
+                    <div class="loading"></div>
+                    <div id="loading-text">loading</div>
+                </div>
             )
 
         } else {
