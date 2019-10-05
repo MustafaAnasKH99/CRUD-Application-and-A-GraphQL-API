@@ -39,19 +39,19 @@ class CreateProducts extends React.Component{
             <form className="add-something grid-item4" onSubmit={this.handleSubmission.bind(this)}>
 
                 <div className="field">
-                    <label>Product name:</label>
-                    <input type="text" onChange = {(e) => {this.setState({name: e.target.value})}}/>
+                    <label className="category-grid4-field1">Product name:</label>
+                    <input className="category-grid4-field2" type="text" onChange = {(e) => {this.setState({name: e.target.value})}}/>
                 </div>
 
                 <div className="field">
-                    <label>Category:</label>
-                    <select onChange = {(e) => {this.setState({parentCategoryId: e.target.value})}}>
+                    <label className="category-grid4-field1">Category:</label>
+                    <select className="category-grid4-field2" onChange = {(e) => {this.setState({parentCategoryId: e.target.value})}}>
                         <option>Select Category</option>
                         { this.displayCategories() }
                     </select>
                 </div>
                 <div className="field">
-                    <button>Create Product</button>
+                    <button className="category-grid4-field3">Create Product</button>
                 </div>
             </form>
         )

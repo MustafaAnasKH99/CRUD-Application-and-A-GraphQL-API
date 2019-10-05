@@ -26,11 +26,11 @@ class CreateCategory extends React.Component{
                 <form id="add-something" onSubmit={this.handleCreation.bind(this)}>
 
                     <div className="field">
-                        <label>Category Name:</label>
-                        <input type="text" onChange = {(e) => {this.setState({name: e.target.value})}}/>
+                        <label className="category-grid3-field1">Category Name:</label>
+                        <input className="category-grid3-field2" type="text" onChange = {(e) => {this.setState({name: e.target.value})}}/>
                     </div>
                     <div className="field">
-                        <button>Create Category</button>
+                        <button className="category-grid3-field3">Create Category</button>
                     </div>
 
                 </form>
