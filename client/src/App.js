@@ -7,9 +7,9 @@ import './App.css';
 import Products from './Components/Products'
 import CreateProduct from './Components/CreateProduct'
 import CreateCategory from './Components/CreateCategory'
-
+// "http://localhost:5000/BeMyGuest"
 const client = new ApolloClient({
-  uri: "http://localhost:5000/BeMyGuest"
+  uri: '/bemyguest'
 })
 
 class App extends React.Component {
