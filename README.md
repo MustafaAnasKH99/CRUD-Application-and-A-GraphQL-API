@@ -13,3 +13,6 @@ Nodejs, Expressjs, GraphQL, and MongoDB (Server Side)
   - go to localhost:3000 (_if the browser does not run the local host automatically_)
 
 ### feel free to track the completion process of this project in the issues section
+
+
+(if you want to see the project live, navigate to https://jolly-swirles-f29573.netlify.com/)
